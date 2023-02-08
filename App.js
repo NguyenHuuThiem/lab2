@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View, Button } from 'react-native';
+import Manager from './Manager';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+
+const Stack = createNativeStackNavigator();
+
+const Home = (props) => {
+  const navigation = props.navigation;
+    return (
+    <View>
+      <Button 
+      title='Thông tin cá nhân' 
+      onPress={() => navigation.navigate('Profile')}
+      />
     </View>
-  );
-}
+    );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+    return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Profile" component={Manager} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    );
+};
+
+export default App;
